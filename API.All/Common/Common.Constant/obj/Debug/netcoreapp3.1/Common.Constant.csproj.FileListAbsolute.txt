@@ -1,0 +1,9 @@
+D:\custom-app\backend\API.All\Common\Common.Constant\bin\Debug\netcoreapp3.1\Common.Constant.deps.json
+D:\custom-app\backend\API.All\Common\Common.Constant\bin\Debug\netcoreapp3.1\Common.Constant.dll
+D:\custom-app\backend\API.All\Common\Common.Constant\bin\Debug\netcoreapp3.1\Common.Constant.pdb
+D:\custom-app\backend\API.All\Common\Common.Constant\obj\Debug\netcoreapp3.1\Common.Constant.GeneratedMSBuildEditorConfig.editorconfig
+D:\custom-app\backend\API.All\Common\Common.Constant\obj\Debug\netcoreapp3.1\Common.Constant.AssemblyInfoInputs.cache
+D:\custom-app\backend\API.All\Common\Common.Constant\obj\Debug\netcoreapp3.1\Common.Constant.AssemblyInfo.cs
+D:\custom-app\backend\API.All\Common\Common.Constant\obj\Debug\netcoreapp3.1\Common.Constant.csproj.CoreCompileInputs.cache
+D:\custom-app\backend\API.All\Common\Common.Constant\obj\Debug\netcoreapp3.1\Common.Constant.dll
+D:\custom-app\backend\API.All\Common\Common.Constant\obj\Debug\netcoreapp3.1\Common.Constant.pdb
