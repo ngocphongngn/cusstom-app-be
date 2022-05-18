@@ -4669,8 +4669,8 @@
     },
     "Common.Utility/1.0.0": {
       "type": "project",
-      "path": "../../Common.Utility/Common.Utility.csproj",
-      "msbuildProject": "../../Common.Utility/Common.Utility.csproj"
+      "path": "../../Common/Common.Utility/Common.Utility.csproj",
+      "msbuildProject": "../../Common/Common.Utility/Common.Utility.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4689,11 +4689,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\custom_app\\backend\\API.All\\Business\\Business.Infrastructure\\Business.Infrastructure.csproj",
+      "projectUniqueName": "D:\\custom-app\\backend\\API.All\\Business\\Business.Infrastructure\\Business.Infrastructure.csproj",
       "projectName": "Business.Infrastructure",
-      "projectPath": "D:\\custom_app\\backend\\API.All\\Business\\Business.Infrastructure\\Business.Infrastructure.csproj",
+      "projectPath": "D:\\custom-app\\backend\\API.All\\Business\\Business.Infrastructure\\Business.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
-      "outputPath": "D:\\custom_app\\backend\\API.All\\Business\\Business.Infrastructure\\obj\\",
+      "outputPath": "D:\\custom-app\\backend\\API.All\\Business\\Business.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4710,11 +4710,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\custom_app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj": {
-              "projectPath": "D:\\custom_app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj"
+            "D:\\custom-app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj": {
+              "projectPath": "D:\\custom-app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj"
             },
-            "D:\\custom_app\\backend\\API.All\\Common.Utility\\Common.Utility.csproj": {
-              "projectPath": "D:\\custom_app\\backend\\API.All\\Common.Utility\\Common.Utility.csproj"
+            "D:\\custom-app\\backend\\API.All\\Common\\Common.Utility\\Common.Utility.csproj": {
+              "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Utility\\Common.Utility.csproj"
             }
           }
         }

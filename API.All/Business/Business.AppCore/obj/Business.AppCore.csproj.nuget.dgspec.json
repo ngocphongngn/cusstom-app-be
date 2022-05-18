@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\custom_app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj": {}
+    "D:\\custom-app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj": {}
   },
   "projects": {
-    "D:\\custom_app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj": {
+    "D:\\custom-app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\custom_app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj",
+        "projectUniqueName": "D:\\custom-app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj",
         "projectName": "Business.AppCore",
-        "projectPath": "D:\\custom_app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj",
+        "projectPath": "D:\\custom-app\\backend\\API.All\\Business\\Business.AppCore\\Business.AppCore.csproj",
         "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
-        "outputPath": "D:\\custom_app\\backend\\API.All\\Business\\Business.AppCore\\obj\\",
+        "outputPath": "D:\\custom-app\\backend\\API.All\\Business\\Business.AppCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\custom_app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
-                "projectPath": "D:\\custom_app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj"
+              "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
+                "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj"
               }
             }
           }
@@ -62,14 +62,14 @@
         }
       }
     },
-    "D:\\custom_app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj": {
+    "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\custom_app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj",
+        "projectUniqueName": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj",
         "projectName": "Common.Constant",
-        "projectPath": "D:\\custom_app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj",
+        "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj",
         "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
-        "outputPath": "D:\\custom_app\\backend\\API.All\\Common\\Common.Constant\\obj\\",
+        "outputPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -116,14 +116,14 @@
         }
       }
     },
-    "D:\\custom_app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
+    "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\custom_app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj",
+        "projectUniqueName": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj",
         "projectName": "Common.Model",
-        "projectPath": "D:\\custom_app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj",
+        "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj",
         "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
-        "outputPath": "D:\\custom_app\\backend\\API.All\\Common\\Common.Model\\obj\\",
+        "outputPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -140,8 +140,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\custom_app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj": {
-                "projectPath": "D:\\custom_app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj"
+              "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj": {
+                "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj"
               }
             }
           }

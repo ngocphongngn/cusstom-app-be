@@ -11,7 +11,10 @@ namespace Business.Infrastructure.Services.Base
         protected readonly static ConcurrentDictionary<int, string> _connections = new ConcurrentDictionary<int, string>();
         public BaseBusinessService(CenterConfig config) : base(config)
         {
-
+        }
+        public override string GetConnectionString()
+        {
+            return _config.Connections.App;
         }
     }
 }

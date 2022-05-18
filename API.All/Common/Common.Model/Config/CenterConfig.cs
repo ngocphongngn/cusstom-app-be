@@ -9,6 +9,7 @@ namespace Common.Model.Config
         public string Env { get; set; }
         public string[] Cors { get; set; }
         public ConnectionStrings Connections { get; set; }
+        public AuthenTokenConfig AuthenToken { get; set; }
         public Dictionary<string, string> ApiUrl { get; set; }
         //public FileConfig File { get; set; }
         public object Clone()

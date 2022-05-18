@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kMxtdzAEvYNUB+feztz1CS4EULBe3ASYRCcU6l/+kwef5PCvM2Y4xAO7kBKKf38kVNw2j1Y2Kab7B++oITvfUA==",
+  "dgSpecHash": "M/CftSezu1lAm65xu9mpx6vml1ks4faRNu3kBvKyYiM9ph640U1fEo5T3huYlvnmZtKqmd8SLCqWwUjWyfdXxg==",
   "success": true,
-  "projectFilePath": "D:\\custom_app\\backend\\API.All\\Business\\Business.Infrastructure\\Business.Infrastructure.csproj",
+  "projectFilePath": "D:\\custom-app\\backend\\API.All\\Business\\Business.Infrastructure\\Business.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phong\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\phong\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",

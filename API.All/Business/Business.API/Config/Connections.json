@@ -1,0 +1,5 @@
+{
+	"Connections": {
+		"App": "Server=127.0.0.1;port=3306;Database=test;Uid=root;Pwd=P1234567@;"
+	}
+}

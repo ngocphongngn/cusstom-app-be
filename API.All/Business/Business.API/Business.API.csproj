@@ -5,13 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common.Utility\Common.Utility.csproj" />
     <ProjectReference Include="..\..\Common\Common.Model\Common.Model.csproj" />
+    <ProjectReference Include="..\..\Common\Common.Utility\Common.Utility.csproj" />
     <ProjectReference Include="..\Business.AppCore\Business.AppCore.csproj" />
     <ProjectReference Include="..\Business.Infrastructure\Business.Infrastructure.csproj" />
   </ItemGroup>

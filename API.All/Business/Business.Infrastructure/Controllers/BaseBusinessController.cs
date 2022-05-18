@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Business.Infrastructure.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public abstract class BaseBusinessController<TEntity, TService> : BaseControler
         where TEntity : IRecordState
         where TService : ICrudService<TEntity>
@@ -29,7 +29,7 @@ namespace Business.Infrastructure.Controllers
         }
 
         [HttpGet("{id}")]
-        public async virtual Task<IActionResult> GetEdit(string id)
+        public async Task<IActionResult> GetEdit(string id)
         {
             try
             {

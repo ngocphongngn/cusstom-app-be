@@ -62,6 +62,12 @@ namespace Business.Infrastructure.BaseControllers
             _log.LogError(ex, $"{message ?? ex.Message}");
         }
 
+        /// <summary>
+        /// Xử lý trả về kết quả client
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="statusCode"></param>
+        /// <returns></returns>
         protected virtual IActionResult ResponseResult(ServiceResult result, int statusCode = 500)
         {
             if (result.Success)

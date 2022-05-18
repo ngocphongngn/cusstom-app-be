@@ -17,6 +17,7 @@ using Business.Infrastructure.Services;
 using Business.Infrastructure;
 using Common.Utility;
 using Microsoft.OpenApi.Models;
+using Business.API.Middleware;
 
 namespace Business.API
 {
@@ -41,6 +42,7 @@ namespace Business.API
             //);
             services.ConfigurationBusinessService(Configuration);
             services.ConfigurationUtilityService(Configuration);
+            services.AddJwtAuthorization(apiConfig.AuthenToken.JwtSecretKey, apiConfig.AuthenToken.JwtIssuer);
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -69,7 +71,7 @@ namespace Business.API
             app.UseCors(MyAllowSpecificOrigins);
             app.UseRouting();
             app.UseAuthentication();
-            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

@@ -60,3 +60,12 @@ D:\custom-app\backend\API.All\Business\Business.API\obj\Debug\netcoreapp3.1\Busi
 D:\custom-app\backend\API.All\Business\Business.API\obj\Debug\netcoreapp3.1\Business.API.dll
 D:\custom-app\backend\API.All\Business\Business.API\obj\Debug\netcoreapp3.1\Business.API.pdb
 D:\custom-app\backend\API.All\Business\Business.API\obj\Debug\netcoreapp3.1\Business.API.genruntimeconfig.cache
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Config\Connections.json
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\custom-app\backend\API.All\Business\Business.API\bin\Debug\netcoreapp3.1\Config\AuthenToken.json

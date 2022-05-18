@@ -1,4 +1,5 @@
 ﻿using Business.AppCore.IRepositories;
+using Common.Model.Config;
 using System;
 using System.Collections.Generic;
 using System.Text;
