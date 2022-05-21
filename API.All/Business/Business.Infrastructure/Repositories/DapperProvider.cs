@@ -1,23 +1,65 @@
 ﻿using Business.AppCore.IRepositories;
+using Common.Utility.Utils;
 using Dapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Business.Infrastructure.BaseRepositories
 {
     public abstract class DapperProvider : IDatabaseProvider
     {
-        public virtual void CloseConnection(IDbConnection connection)
+        /// <summary>
+        /// Các từ check sql injection
+        /// </summary>
+        private static string[] _InjectionWords = new string[] {
+            "--",
+            "#",
+            "\\/*",
+            "*\\/",
+            "grant ",
+            "drop ",
+            "truncate ",
+            "sleep( ",
+            "exec ",
+            "execute ",
+            "prepare ",
+            "information_schema",
+            "delay ",
+        };
+        /// <summary>
+        /// Các từ khóa bỏ qua khi kiểm tra
+        /// </summary>
+        private static string[] _InjectionIgnoreWords = new string[] {
+            "''",
+            "'MORE_DETAILS'",
+            "'$'", "\"$\"",
+            "'%'", "\"%\"",
+            "','", "\",\"",
+            "'\", \"'", "'\", \"'",
+            "'\\[\"'",
+            "'\"\\]'",
+            "\"$[*]\"", @"\'$[*]\'",
+            @"\'\$\.[a-zA-Z0-9]+\'", "\"\\$\\.[a-zA-Z0-9]+\"",
+            @"'null'", "\"null\"",
+            "\"ONLY_FULL_GROUP_BY,NO_UNSIGNED_SUBTRACTION,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION\"",
+            "'Other'",
+            "'#'",
+            "Drop TEMPORARY table"
+        };
+        private static string _InjecttionIgnoreWordsReplace = " ";
+
+        /// <summary>
+        /// Các từ khóa bị remove khỏi sql
+        /// </summary>
+        private static Dictionary<string, string> _InjectionRemoveWords = new Dictionary<string, string>
         {
-            if (connection != null)
-            {
-                connection.Close();
-                connection.Dispose();
-            }
-        }
+            { "\\/\\*(.*)\\*\\/", ""}
+        };
 
         public List<T> ExecuteQueryObject<T>(string storeName, object param = null)
         {
@@ -39,6 +81,329 @@ namespace Business.Infrastructure.BaseRepositories
             return result.ToList();
         }
 
+        public int ExecuteNonQueryText(string commandText, Dictionary<string, object> param, int? timeout = null)
+        {
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = GetOpenConnection();
+                return this.ExecuteNonQueryText(cnn, commandText, param, timeout: timeout);
+            }
+            finally
+            {
+                CloseConnection(cnn);
+            }
+        }
+
+        public int ExecuteNonQueryText(IDbConnection cnn, string commandText, Dictionary<string, object> param, int? timeout = null)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if(param != null)
+            {
+                foreach(var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var result = cnn.Execute(sql, dynamicParams, commandType: CommandType.Text, commandTimeout: timeout);
+            return result;
+        }
+
+        public int ExecuteNonQueryText(IDbTransaction transaction, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var result = transaction.Connection.Execute(sql, dynamicParams, commandType: CommandType.Text, transaction: transaction);
+            return result;
+        }
+        public int ExecuteNonQueryText(string commandText, object param)
+        {
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = GetOpenConnection();
+                return this.ExecuteNonQueryText(cnn, commandText, param);
+            }
+            finally
+            {
+                CloseConnection(cnn);
+            }
+        }
+        public int ExecuteNonQueryText(IDbConnection cnn, string commandText, object param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var result = cnn.Execute(sql, param, commandType: CommandType.Text);
+            return result;
+        }
+        public int ExecuteNonQueryText(IDbTransaction transaction, string commandText, object param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var result = transaction.Connection.Execute(sql, param, commandType: CommandType.Text, transaction:transaction);
+            return result;
+        }
+        public object ExecuteScalarText(string commandText, Dictionary<string, object> param)
+        {
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = GetOpenConnection();
+                return this.ExecuteScalarText(cnn, commandText, param);
+            }
+            finally
+            {
+                CloseConnection(cnn);
+            }
+        }
+
+        public object ExecuteScalarText(IDbConnection cnn, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var result = cnn.ExecuteScalar(sql, dynamicParams, commandType: CommandType.Text);
+            return result;
+        }
+
+        public object ExecuteScalarText(IDbTransaction transaction, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var result = transaction.Connection.ExecuteScalar(sql, dynamicParams, commandType: CommandType.Text, transaction: transaction);
+            return result;
+        }
+        public object ExecuteScalarText(string commandText, object param)
+        {
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = GetOpenConnection();
+                return this.ExecuteScalarText(cnn, commandText, param);
+            }
+            finally
+            {
+                CloseConnection(cnn);
+            }
+        }
+        public object ExecuteScalarText(IDbConnection cnn, string commandText, object param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var result = cnn.ExecuteScalar(sql, param, commandType: CommandType.Text);
+            return result;
+        }
+        public object ExecuteScalarText(IDbTransaction transaction, string commandText, object param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var result = transaction.Connection.ExecuteScalar(sql, param, commandType: CommandType.Text, transaction: transaction);
+            return result;
+        }
+        public List<T> Query<T>(string commandText, Dictionary<string, object> param)
+        {
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = GetOpenConnection();
+                return this.Query<T>(cnn, commandText, param);
+            }
+            finally
+            {
+                CloseConnection(cnn);
+            }
+        }
+        public List<T> Query<T>(IDbConnection cnn, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if(param != null)
+            {
+                foreach(var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var result = cnn.Query<T>(sql, dynamicParams, commandType: CommandType.Text);
+            return result.AsList();
+        }
+        public List<T> Query<T>(IDbTransaction transaction, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var result = transaction.Connection.Query<T>(sql, dynamicParams, commandType: CommandType.Text, transaction: transaction);
+            return result.AsList();
+        }
+        public IList Query(Type type, string commandText, Dictionary<string, object> param)
+        {
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = GetOpenConnection();
+                return this.Query(cnn, type, commandText, param);
+            }
+            finally
+            {
+                CloseConnection(cnn);
+            }
+        }
+        public IList Query(IDbConnection cnn, Type type, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var data = cnn.Query(type, sql, dynamicParams, commandType: CommandType.Text) as IList;
+            var result = TypeUtil.CreateList(type);
+            foreach(var item in data)
+            {
+                result.Add(item);
+            }
+            return result;
+        }
+        public IList Query(IDbTransaction transaction, Type type, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var data = transaction.Connection.Query(type, sql, dynamicParams, commandType: CommandType.Text, transaction: transaction) as IList;
+            var result = TypeUtil.CreateList(type);
+            foreach (var item in data)
+            {
+                result.Add(item);
+            }
+            return result;
+        }
+        public IEnumerable<dynamic> Query(string commandText, Dictionary<string, object> param)
+        {
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = GetOpenConnection();
+                return this.Query(cnn, commandText, param);
+            }
+            finally
+            {
+                CloseConnection(cnn);
+            }
+        }
+
+        public IEnumerable<dynamic> Query(IDbConnection cnn, string commandText, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var data = cnn.Query(sql, dynamicParams, commandType: CommandType.Text);
+            return data;
+        }
+
+        public List<T> QueryWithCommandType<T>(IDbConnection cnn, string commandText, CommandType pCommandType, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var data = cnn.Query<T>(sql, dynamicParams, commandType: pCommandType);
+            return data.ToList();
+        }
+
+        public List<T> QueryWithCommandType<T>(IDbTransaction transaction, string commandText, CommandType pCommandType, Dictionary<string, object> param)
+        {
+            var sql = this.ProcessSqlBeforExecute(commandText);
+            var dynamicParams = new DynamicParameters();
+            if (param != null)
+            {
+                foreach (var item in param)
+                {
+                    dynamicParams.Add(item.Key, value: item.Value);
+                }
+            }
+            var data = transaction.Connection.Query<T>(sql, dynamicParams, commandType: pCommandType);
+            return data.ToList();
+        }
+        /// <summary>
+        /// Xử lý câu lệnh trc khi exe
+        /// </summary>
+        public string ProcessSqlBeforExecute(string sql)
+        {
+            var result = sql;
+            if(_InjectionRemoveWords != null)
+            {
+                foreach(var item in _InjectionRemoveWords)
+                {
+                    result = Regex.Replace(result, item.Key, item.Value);
+                }
+            }
+            this.ValidateSqlInjection(result);
+            return result;
+        }
+        /// <summary>
+        /// Check sql injection
+        /// </summary>
+        private void ValidateSqlInjection(string sql)
+        {
+            var checkSql = sql;
+            if(_InjectionIgnoreWords != null)
+            {
+                foreach(var item in _InjectionIgnoreWords)
+                {
+                    checkSql = Regex.Replace(checkSql, item, _InjecttionIgnoreWordsReplace, RegexOptions.IgnoreCase);
+                }
+            }
+            foreach(var item in _InjectionWords)
+            {
+                if(checkSql.IndexOf(item, StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    throw new Exception($"Query invalid {item}: {checkSql}");
+                }
+            }
+        }
         private DynamicParameters BuildParams(string storeName, IDbConnection cnn, object entity, IDbTransaction transaction = null)
         {
             var dynamicParameters = new DynamicParameters();
@@ -129,5 +494,14 @@ namespace Business.Infrastructure.BaseRepositories
             cnn.Open();
             return cnn;
         }
+        public virtual void CloseConnection(IDbConnection connection)
+        {
+            if (connection != null)
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
     }
 }

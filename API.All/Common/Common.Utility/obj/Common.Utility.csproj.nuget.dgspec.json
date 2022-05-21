@@ -4,6 +4,118 @@
     "D:\\custom-app\\backend\\API.All\\Common\\Common.Utility\\Common.Utility.csproj": {}
   },
   "projects": {
+    "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj",
+        "projectName": "Common.Constant",
+        "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj",
+        "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
+        "outputPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj",
+        "projectName": "Common.Model",
+        "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj",
+        "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
+        "outputPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj": {
+                "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Constant\\Common.Constant.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\custom-app\\backend\\API.All\\Common\\Common.Utility\\Common.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -27,7 +139,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
+                "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

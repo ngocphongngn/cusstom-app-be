@@ -1,7 +1,9 @@
 ﻿using Business.AppCore.IServices.IBaseServices;
 using Business.Infrastructure.BaseControllers;
 using Common.Model.Base;
+using Common.Model.Parameter;
 using Common.Utility.Services;
+using Common.Constant.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +29,9 @@ namespace Business.Infrastructure.Controllers
             _service = service;
             _paramService = paramService;
         }
-
+        /// <summary>
+        /// Lấy dữ liệu theo id
+        /// </summary>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEdit(string id)
         {
@@ -45,5 +49,36 @@ namespace Business.Infrastructure.Controllers
                 return HandleException(ex);
             }
         }
+        [HttpPost]
+        public async virtual Task<IActionResult> Insert(SaveParameter<TEntity> parameter)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                parameter.Entity.EntityState = Common.Constant.Enums.ModelState.Insert;
+                result = await _service.SaveAsync(parameter);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+        [HttpPut]
+        public async virtual Task<IActionResult> Update(SaveParameter<TEntity> parameter)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                parameter.Entity.EntityState = Common.Constant.Enums.ModelState.Update;
+                result = await _service.SaveAsync(parameter);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+
     }
 }

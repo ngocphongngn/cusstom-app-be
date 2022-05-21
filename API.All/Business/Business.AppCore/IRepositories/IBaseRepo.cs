@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using Common.Model.Base;
+using Common.Model.Other;
 
 namespace Business.AppCore.IRepositories
 {
@@ -84,15 +85,15 @@ namespace Business.AppCore.IRepositories
         /// <summary>
         /// Submit lst dữ liệu
         /// </summary>
-        void Submit(List<ModelData> data);
+        void Submit(List<SubmitModel> data);
         /// <summary>
         /// Submit lst dữ liệu
         /// </summary>
-        void Submit(IDbConnection cnn, List<ModelData> data);
+        void Submit(IDbConnection cnn, List<SubmitModel> data);
         /// <summary>
         /// Submit lst dữ liệu
         /// </summary>
-        void Submit(IDbTransaction transaction, List<ModelData> data);
+        void Submit(IDbTransaction transaction, List<SubmitModel> data);
 
     }
 }

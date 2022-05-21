@@ -2,13 +2,14 @@
 using Common.Model.Base;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using Common.Model.Attributes;
 
 namespace Common.Model.Business
 {
     public class Test : IRecordState
     {
+        [Key]
         public int TestID { get; set; }
         public string TestName { get; set; }
         [NotMapped]

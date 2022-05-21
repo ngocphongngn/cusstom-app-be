@@ -52,6 +52,29 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "Common.Constant/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Common.Constant.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.Constant.dll": {}
+        }
+      },
+      "Common.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Common.Constant": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Common.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.Model.dll": {}
+        }
       }
     }
   },
@@ -149,10 +172,21 @@
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Common.Constant/1.0.0": {
+      "type": "project",
+      "path": "../Common.Constant/Common.Constant.csproj",
+      "msbuildProject": "../Common.Constant/Common.Constant.csproj"
+    },
+    "Common.Model/1.0.0": {
+      "type": "project",
+      "path": "../Common.Model/Common.Model.csproj",
+      "msbuildProject": "../Common.Model/Common.Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Common.Model >= 1.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 6.0.0",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 6.0.0"
     ]
@@ -183,7 +217,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
+              "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

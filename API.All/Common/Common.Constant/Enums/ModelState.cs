@@ -11,4 +11,9 @@ namespace Common.Constant.Enums
         Update = 2,
         Delete = 3
     }
+    public enum DeleteType: int
+    {
+        Single = 1,
+        Multi = 2
+    }
 }

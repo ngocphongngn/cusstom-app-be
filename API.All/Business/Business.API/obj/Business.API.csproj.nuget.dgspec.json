@@ -368,7 +368,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj": {
+                "projectPath": "D:\\custom-app\\backend\\API.All\\Common\\Common.Model\\Common.Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

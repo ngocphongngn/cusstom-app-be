@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common.Model.Base
+namespace Common.Model.Other
 {
-    public class ModelData
+    /// <summary>
+    /// Đối tượng submit dữ liệu vào db
+    /// </summary>
+    public class SubmitModel
     {
         /// <summary>
-        /// Tên bảng update
+        /// Bảng dữ liệu
         /// </summary>
         public string TableName { get; set; }
         /// <summary>

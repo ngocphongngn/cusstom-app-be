@@ -992,6 +992,7 @@
       },
       "Common.Utility/1.0.0": {
         "dependencies": {
+          "Common.Model": "1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
         },
