@@ -5,6 +5,7 @@ using Common.Model.Business;
 using Common.Model.Config;
 using Common.Model.Parameter;
 using Common.Utility.Services;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -77,19 +78,152 @@ namespace Business.Infrastructure.Services.Base
             }
         }
 
-        public Task<ServiceResult> DeleteAsync(DeleteParameter<TEntity> parameter)
+        public async Task<ServiceResult> DeleteAsync(DeleteParameter<TEntity> parameter)
         {
-            throw new NotImplementedException();
+            var result = new ServiceResult();
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = _repo.Provider.GetOpenConnection();
+                result = await this.DeleteAsync(cnn, parameter);
+            }
+            finally
+            {
+                _repo.Provider.CloseConnection(cnn);
+            }
+            return result;
         }
 
-        public Task<ServiceResult> DeleteAsync(DeleteParameter<List<TEntity>> parameter)
+        public virtual async Task<ServiceResult> DeleteAsync(DeleteParameter<List<TEntity>> parameter)
         {
-            throw new NotImplementedException();
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = _repo.Provider.GetOpenConnection();
+                if(parameter.Entity.Count == 1)
+                {
+                    var result = new ServiceResult();
+                    var delResult = await this.DeleteAsync(cnn, new DeleteParameter<TEntity> {
+                        Entity = parameter.Entity.First(),
+                        ByPassValidate = parameter.ByPassValidate,
+                        Type = parameter.Type
+                    });
+                    var errorData = new List<object>();
+                    if (!delResult.Success)
+                    {
+                        errorData.Add(new {
+                            Entity = parameter.Entity.First(),
+                            Data = delResult.Data,
+                            Message = delResult.UserMessage,
+                            Type = parameter.Type
+                        });
+                        return result.OnError(delResult.Code, "", errorData);
+                    }
+                    else
+                    {
+                        return delResult;
+                    }
+                }
+                else
+                {
+                    var result = new ServiceResult();
+                    var errorData = new List<object>();
+                    foreach(var item in parameter.Entity)
+                    {
+                        var itemParam = new DeleteParameter<TEntity> {
+                            Entity = item,
+                            ByPassValidate = parameter.ByPassValidate,
+                        };
+                        var itemResult = await this.DeleteAsync(cnn, itemParam);
+                        if (!itemResult.Success)
+                        {
+                            errorData.Add(new {
+                                Entity = item,
+                                Data = itemResult.Data,
+                                Message = itemResult.UserMessage,
+                                Type = parameter.Type
+                            });
+                        }
+                    }
+                    if(errorData.Count > 0)
+                    {
+                        result.OnError(ServiceResponseCode.PartInvalidData, "", errorData);
+                    }
+                    return result;
+                }
+            }
+            finally
+            {
+                _repo.Provider.CloseConnection(cnn);
+            }
         }
 
-        public Task<List<TEntity>> GetAll()
+        public async Task<ServiceResult> DeleteAsync(IDbConnection cnn, DeleteParameter<TEntity> parameter)
         {
-            throw new NotImplementedException();
+            var result = new ServiceResult();
+            try
+            {
+                //validate
+                //var validateResult = await this.ValidateDelete(cnn, parameter);
+                //if (validateResult != null && validateResult.Any(n => n.Type == ValidateResultType.Error || n.Type == ValidateResultType.Warning){
+                //    var errorCode = ServiceResponseCode.InvalidData;
+                //    if (validateResult.Any(n => n.Type == ValidateResultType.Error && n.Code == ValidateCode.Arise.ToString())){
+                //        errorCode = ServiceResponseCode.Arisened;
+                //    }
+                //    result.OnError(errorCode, "", validateResult);
+                //}
+                //else
+                //{
+                    // await this.BeforeDelete(cnn, parameter);
+                    result = await this.DeleteData(cnn, parameter, result);
+                    //await this.AfterDelete(cnn, parameter, result);
+                //}
+            }catch(Exception ex)
+            {
+                result.OnException(ex);
+            }
+            return result;
+        }
+        public virtual async Task<ServiceResult> DeleteData(IDbConnection cnn, DeleteParameter<TEntity> parameter, ServiceResult result)
+        {
+            IDbTransaction transaction = null;
+            try
+            {
+                using (transaction = cnn.BeginTransaction())
+                {
+                    //result = await this.BeforeDeleteData(transaction, parameter, result);
+                    if(result.Code == ServiceResponseCode.Success)
+                    {
+                        _repo.Delete(transaction, parameter.Entity);
+                        //result = await this.AfterDeleteData(transaction, parameter, result);
+                    }
+                    if (result.Code != ServiceResponseCode.Success)
+                    {
+                        transaction.Rollback();
+                        result.OnError(result.Code, result.SubCode, result.Data);
+                    }
+                    else
+                    {
+                        transaction.Commit();
+                        //await this.DeleteComplete(cnn, parameter, result);
+                    }
+                }
+            }catch(MySqlException ex)
+            {
+                this.RollBackTransaction(transaction);
+                throw;
+            }
+            catch (Exception)
+            {
+                this.RollBackTransaction(transaction);
+                throw;
+            }
+            return result;
+        }
+        public virtual async Task<List<TEntity>> GetAll()
+        {
+            var result = _repo.Get<TEntity>();
+            return result;
         }
 
         public virtual async Task<TEntity> GetEdit(string id)
@@ -134,11 +268,37 @@ namespace Business.Infrastructure.Services.Base
             //to do get file sql
             return null;
         }
-        public Task<TEntity> GetNew(string param)
+        public virtual async Task<TEntity> GetNew(string param)
         {
-            throw new NotImplementedException();
+            IDbConnection cnn = null;
+            try
+            {
+                cnn = this._repo.Provider.GetOpenConnection();
+                return await this.GetNew(cnn, param);
+            }
+            finally
+            {
+                _repo.Provider.CloseConnection(cnn);
+            }
         }
-
+        public virtual async Task<TEntity> GetNew(IDbConnection cnn, string param)
+        {
+            var entity = this.CreateEntity();
+            //var details = this.GetDetailAttribute(entity);
+            //if(details != null && details.Count > 0)
+            //{
+            //    foreach(var detail in details)
+            //    {
+            //        this.CreateDefaultDetailData(entity, detail.Key);
+            //    }
+            //}
+            //this.ProcessNewCode(cnn, entity);
+            return entity;
+        }
+        public virtual TEntity CreateEntity()
+        {
+            return Activator.CreateInstance<TEntity>();
+        }
         public virtual async Task<ServiceResult> SaveAsync(SaveParameter<TEntity> parameter)
         {
             var result = new ServiceResult();
@@ -225,10 +385,10 @@ namespace Business.Infrastructure.Services.Base
                     _repo.Insert(transaction, data);
                     break;
                 case ModelState.Update:
-                    _repo.Insert(transaction, data);
+                    _repo.Update(transaction, data);
                     break;
                 case ModelState.Delete:
-                    _repo.Insert(transaction, data);
+                    _repo.Delete(transaction, data);
                     break;
             }
         }

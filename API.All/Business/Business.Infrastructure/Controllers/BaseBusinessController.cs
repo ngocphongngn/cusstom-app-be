@@ -79,6 +79,19 @@ namespace Business.Infrastructure.Controllers
                 return HandleException(ex);
             }
         }
+        [HttpDelete]
+        public async virtual Task<IActionResult> Delete(DeleteParameter<List<TEntity>> parameter)
+        {
+            try
+            {
+                var result = await _service.DeleteAsync(parameter);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
 
     }
 }
