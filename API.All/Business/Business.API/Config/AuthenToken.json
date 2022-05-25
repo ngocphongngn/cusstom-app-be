@@ -1,0 +1,8 @@
+﻿{
+  "AuthenToken": {
+    "JwtIssuer": "nnphong",
+    "JwtSecretKey": "P!@#$%^&PPPPPPPPPPP",
+    "ExpiredHouts": "12",
+    "TempCacheMinutes":  "30"
+  }
+}

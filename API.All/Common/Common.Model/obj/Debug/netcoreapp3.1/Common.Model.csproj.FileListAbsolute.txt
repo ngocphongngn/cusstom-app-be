@@ -1,0 +1,13 @@
+D:\custom-app\backend\API.All\Common\Common.Model\bin\Debug\netcoreapp3.1\Common.Model.deps.json
+D:\custom-app\backend\API.All\Common\Common.Model\bin\Debug\netcoreapp3.1\Common.Model.dll
+D:\custom-app\backend\API.All\Common\Common.Model\bin\Debug\netcoreapp3.1\Common.Model.pdb
+D:\custom-app\backend\API.All\Common\Common.Model\bin\Debug\netcoreapp3.1\Common.Constant.dll
+D:\custom-app\backend\API.All\Common\Common.Model\bin\Debug\netcoreapp3.1\Common.Constant.pdb
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.csproj.AssemblyReference.cache
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.AssemblyInfoInputs.cache
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.AssemblyInfo.cs
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.csproj.CoreCompileInputs.cache
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.csproj.CopyComplete
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.dll
+D:\custom-app\backend\API.All\Common\Common.Model\obj\Debug\netcoreapp3.1\Common.Model.pdb

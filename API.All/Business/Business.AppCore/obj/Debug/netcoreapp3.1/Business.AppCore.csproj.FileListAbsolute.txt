@@ -1,0 +1,15 @@
+D:\custom-app\backend\API.All\Business\Business.AppCore\bin\Debug\netcoreapp3.1\Business.AppCore.deps.json
+D:\custom-app\backend\API.All\Business\Business.AppCore\bin\Debug\netcoreapp3.1\Business.AppCore.dll
+D:\custom-app\backend\API.All\Business\Business.AppCore\bin\Debug\netcoreapp3.1\Business.AppCore.pdb
+D:\custom-app\backend\API.All\Business\Business.AppCore\bin\Debug\netcoreapp3.1\Common.Constant.dll
+D:\custom-app\backend\API.All\Business\Business.AppCore\bin\Debug\netcoreapp3.1\Common.Model.dll
+D:\custom-app\backend\API.All\Business\Business.AppCore\bin\Debug\netcoreapp3.1\Common.Model.pdb
+D:\custom-app\backend\API.All\Business\Business.AppCore\bin\Debug\netcoreapp3.1\Common.Constant.pdb
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.csproj.AssemblyReference.cache
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.AssemblyInfoInputs.cache
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.AssemblyInfo.cs
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.csproj.CoreCompileInputs.cache
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.csproj.CopyComplete
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.dll
+D:\custom-app\backend\API.All\Business\Business.AppCore\obj\Debug\netcoreapp3.1\Business.AppCore.pdb
